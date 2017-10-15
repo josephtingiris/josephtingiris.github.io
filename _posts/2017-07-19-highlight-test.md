@@ -6,6 +6,7 @@ categories:
 tags:
     - test
     - jekyll
+    - highlight
 ---
 
 This is a highlight test.

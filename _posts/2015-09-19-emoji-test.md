@@ -6,6 +6,7 @@ categories:
 tags:
     - test
     - jekyll
+    - emoji
 ---
 
 This is an emoji test. :smile: lol.

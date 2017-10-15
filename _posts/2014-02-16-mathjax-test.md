@@ -6,6 +6,7 @@ categories:
 tags:
     - test
     - jekyll
+    - mathjax
 image: http://gastonsanchez.com/images/blog/mathjax_logo.png
 ---
 

@@ -1,12 +1,14 @@
 ---
 layout: post
-title: Emoji Test
+title: "Emoji Test"
 categories:
-    - test
+    - jekyll
+    - emoji
 tags:
     - test
     - jekyll
     - emoji
+published: true
 ---
 
 This is an emoji test. :smile: lol.

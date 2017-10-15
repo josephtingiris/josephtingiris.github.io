@@ -2,12 +2,14 @@
 layout: post
 title: "MathJax Test"
 categories:
-    - test
+    - jekyll
+    - mathjax
 tags:
     - test
     - jekyll
     - mathjax
 image: http://gastonsanchez.com/images/blog/mathjax_logo.png
+published: true
 ---
 
 One of the rewards of switching my website to [Jekyll](http://jekyllrb.com/) is the

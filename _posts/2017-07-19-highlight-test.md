@@ -1,12 +1,14 @@
 ---
 layout: post
-title: Highlight Test
+title: "Highlight Test"
 categories:
-    - test
+    - jekyll
+    - highlight
 tags:
     - test
     - jekyll
     - highlight
+published: true
 ---
 
 This is a highlight test.

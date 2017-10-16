@@ -67,8 +67,8 @@ feed:
 plugins:
 # jemoji conficts with toc in some no-ascii post
  - jemoji
- - jekyll-sitemap
  - jekyll-feed
+ - jekyll-sitemap
 
 # ---------------------------------------------------------------
 # Site Information Settings
@@ -78,7 +78,7 @@ plugins:
 favicon: /assets/favicon.ico
 
 # Set default keywords (Use a comma to separate)
-keywords: "Jekyll, NexT"
+keywords: "Joseph, Tingiris"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.

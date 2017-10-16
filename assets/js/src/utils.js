@@ -206,6 +206,10 @@ NexT.utils = NexT.$u = {
     $('.sidebar-toggle').trigger('click');
   },
 
+  isJoseph: function () {
+    return CONFIG.scheme === 'Joseph';
+  },
+
   isMist: function () {
     return CONFIG.scheme === 'Mist';
   },

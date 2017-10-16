@@ -5,8 +5,8 @@
 
 # Site
 title: Joseph Tingiris
-subtitle: <i>There's theory in practice though no practice in theory.</i>
-description:
+subtitle: There's theory in practice, though no practice in theory.
+description: Discover, Define, Develop, Deploy
 author: Joseph Tingiris
 # Support language: de, en, fr-FR, id, ja, ko, pt-BR, pt, ru, zh-Hans, zh-hk, zh-tw
 language: en
@@ -86,7 +86,7 @@ keywords: "Jekyll, NexT"
 rss:
 
 # Specify the date when the site was setup
-#since: 2015
+since: 2012
 
 # icon between year and author @Footer
 authoricon: cog
@@ -104,7 +104,7 @@ copyright: false
 canonical: true
 
 # Change headers hierarchy on site-subtitle (will be main site description) and on all post/pages titles for better SEO-optimization.
-seo: false
+seo: true
 
 # If true, will add site-subtitle to index page, added in jekyll config.
 # subtitle: Subtitle
@@ -150,10 +150,10 @@ menu_icons:
 # ---------------------------------------------------------------
 
 # Schemes
-scheme: Muse
+#scheme: Muse
 #scheme: Mist
 #scheme: Pisces
-
+scheme: Joseph
 
 # ---------------------------------------------------------------
 # Font Settings

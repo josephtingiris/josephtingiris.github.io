@@ -1,6 +1,8 @@
 ---
 layout: post
 title: "GitHub Metadata: No GitHub API authentication could be found. Some fields may be missing or have incorrect data."
+date: 2017-10-15 18:00:12 -0400
+last_modified_at: 2017-10-15 18:18:18 -0400
 categories:
     - jekyll
     - github

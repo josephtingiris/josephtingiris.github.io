@@ -43,6 +43,7 @@ highlighter: rouge
 
 #### Markdown Processors
 ## 'redcarpet' is unsupported on GitHub Pages now.
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 markdown: kramdown
 kramdown:
     input: GFM

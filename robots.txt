@@ -1,3 +1,6 @@
 User-agent: *
-Disallow: /assets/
+Disallow: /assets/css/
+Disallow: /assets/js/
+Disallow: /assets/lib/
+Disallow: /assets/fonts/
 Sitemap: https://josephtingiris.github.io/sitemap.xml

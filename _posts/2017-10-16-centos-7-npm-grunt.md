@@ -17,7 +17,7 @@ tags:
 published: true
 ---
 
-This is the basic process.
+This is the basic process to install and build an existing project with npm and grunt on CentoOS 7.
 
 [npm](https://www.npmjs.com/) is the package manager for JavaScript
 ```

@@ -220,7 +220,7 @@ Many packages, programs, & utilities (and people) expect the default CentOS 7 fi
 * If you chose to update the `/opt/rh/httpd24/root/etc/httpd` OPTIONS then make sure there are no base httpd artifacts left in `/etc/httpd`.  Using rsync can be helpful in this case, i.e.
 
     ```
-    resync -avp /opt/rh/httpd24/root/var/run/httpd/ /etc/httpd/ --delete-after
+    rsync -avp /opt/rh/httpd24/root/etc/httpd/ /etc/httpd/ --delete-after
     ```
 
 * On CentOS 7 machines with *only* rh-php-7.0 installed, it may be easiest to use a symbolic link.  However, it should **not** be done on machines that choose to have the default php and scl php co-exist on the same machine.

@@ -3,7 +3,7 @@ layout: post
 title: "How to install RedHat Software Collections Library PHP 7 on CentOS 7"
 author: "Joseph Tingiris"
 date: 2016-08-28 07:19:59 -0400
-last_modified_at: 2017-10-21 16:03:00 -0400
+last_modified_at: 2017-12-22 12:19:00 -0400
 categories:
 - howto
 - install
@@ -22,36 +22,36 @@ published: true
 # Ensure httpd is stopped and disabled.
 
 ```
-systemctl stop httpd
-systemctl disable httpd
+sudo systemctl stop httpd
+sudo systemctl disable httpd
 ```
 
 # Install the CentOS EPEL & Software Collections Library (scl) release packages, clean, & rebuild the yum cache.
 
 ```
-yum install epel-release centos-release-scl
-yum clean all
-yum makecache
+sudo yum install epel-release centos-release-scl
+sudo yum clean all
+sudo yum makecache
 ```
 
-# Install the latest RedHat SCL php 7.0 & corresponding, dependent httpd24 packages.
+# Install the latest RedHat SCL php 7.1 & corresponding, dependent httpd24 packages.
 
 The following command installs the most commonly required php modules, as well.
 
 ```
-yum install rh-php70 rh-php70-php rh-php70-php-bcmath rh-php70-php-cli rh-php70-php-common rh-php70-php-dba rh-php70-php-embedded rh-php70-php-enchant rh-php70-php-fpm rh-php70-php-gd rh-php70-php-intl rh-php70-php-ldap rh-php70-php-mbstring rh-php70-php-mysqlnd rh-php70-php-odbc rh-php70-php-pdo rh-php70-php-pear rh-php70-php-pgsql rh-php70-php-process rh-php70-php-pspell rh-php70-php-recode rh-php70-php-snmp rh-php70-php-soap rh-php70-php-xml rh-php70-php-xmlrpc sclo-php70-php-imap sclo-php70-php-mcrypt sclo-php70-php-pecl-apcu sclo-php70-php-pecl-apcu-bc sclo-php70-php-pecl-memcached sclo-php70-php-tidy httpd24 httpd24-mod_ssl
+sudo yum install rh-php71 rh-php71-php rh-php71-php-bcmath rh-php71-php-cli rh-php71-php-common rh-php71-php-dba rh-php71-php-embedded rh-php71-php-enchant rh-php71-php-fpm rh-php71-php-gd rh-php71-php-intl rh-php71-php-ldap rh-php71-php-mbstring rh-php71-php-mysqlnd rh-php71-php-odbc rh-php71-php-pdo rh-php71-php-pear rh-php71-php-pecl-apcu rh-php71-php-pgsql rh-php71-php-process rh-php71-php-pspell rh-php71-php-recode rh-php71-php-snmp rh-php71-php-soap rh-php71-php-xml rh-php71-php-xmlrpc sclo-php71-php-imap sclo-php71-php-mcrypt sclo-php71-php-pecl-apcu-bc sclo-php71-php-pecl-memcached sclo-php71-php-tidy httpd24 httpd24-mod_ssl
 ```
 
 # Configure the necessary operating system files.
 
 For **''bash''**, **''crond''**, & **''systemctl''** to work properly with the RedHat SCL php 7 packages, the following files MUST be configured manually.
 
-#### /etc/ld.so.conf.d/rh-php70.conf
+#### /etc/ld.so.conf.d/rh-php71.conf
 
 ```
-/opt/rh/rh-php70/root/usr/lib64
+/opt/rh/rh-php71/root/usr/lib64
 /opt/rh/httpd24/root/usr/lib64
-/opt/rh/rh-php70/root/usr/lib
+/opt/rh/rh-php71/root/usr/lib
 /opt/rh/httpd24/root/usr/lib
 ```
 
@@ -111,91 +111,91 @@ WantedBy=multi-user.target
 # Enable, start, and check the status of httpd.
 
 ```
-systemctl daemon-reload # important!
-systemctl enable httpd
-systemctl start httpd
-systemctl status httpd
+sudo systemctl daemon-reload # important!
+sudo systemctl enable httpd
+sudo systemctl start httpd
+sudo systemctl status httpd
 ```
 
 # Verify locations of php ini files.
 
-*At this point, there should be a fully functional httpd 2.4 with php 7.0 (using the mysqlnd driver, etc).*
+*At this point, there should be a fully functional httpd 2.4 with php 7.1 (using the mysqlnd driver, etc).*
 
 `php --ini`
 
 ```
-Configuration File (php.ini) Path: /etc/opt/rh/rh-php70
-Loaded Configuration File:         /etc/opt/rh/rh-php70/php.ini
-Scan for additional .ini files in: /etc/opt/rh/rh-php70/php.d
-Additional .ini files parsed:      /etc/opt/rh/rh-php70/php.d/20-bcmath.ini,
-/etc/opt/rh/rh-php70/php.d/20-bz2.ini,
-/etc/opt/rh/rh-php70/php.d/20-calendar.ini,
-/etc/opt/rh/rh-php70/php.d/20-ctype.ini,
-/etc/opt/rh/rh-php70/php.d/20-curl.ini,
-/etc/opt/rh/rh-php70/php.d/20-dba.ini,
-/etc/opt/rh/rh-php70/php.d/20-dom.ini,
-/etc/opt/rh/rh-php70/php.d/20-enchant.ini,
-/etc/opt/rh/rh-php70/php.d/20-exif.ini,
-/etc/opt/rh/rh-php70/php.d/20-fileinfo.ini,
-/etc/opt/rh/rh-php70/php.d/20-ftp.ini,
-/etc/opt/rh/rh-php70/php.d/20-gd.ini,
-/etc/opt/rh/rh-php70/php.d/20-gettext.ini,
-/etc/opt/rh/rh-php70/php.d/20-iconv.ini,
-/etc/opt/rh/rh-php70/php.d/20-imap.ini,
-/etc/opt/rh/rh-php70/php.d/20-intl.ini,
-/etc/opt/rh/rh-php70/php.d/20-json.ini,
-/etc/opt/rh/rh-php70/php.d/20-ldap.ini,
-/etc/opt/rh/rh-php70/php.d/20-mbstring.ini,
-/etc/opt/rh/rh-php70/php.d/20-mcrypt.ini,
-/etc/opt/rh/rh-php70/php.d/20-mysqlnd.ini,
-/etc/opt/rh/rh-php70/php.d/20-odbc.ini,
-/etc/opt/rh/rh-php70/php.d/20-pdo.ini,
-/etc/opt/rh/rh-php70/php.d/20-pgsql.ini,
-/etc/opt/rh/rh-php70/php.d/20-phar.ini,
-/etc/opt/rh/rh-php70/php.d/20-posix.ini,
-/etc/opt/rh/rh-php70/php.d/20-pspell.ini,
-/etc/opt/rh/rh-php70/php.d/20-recode.ini,
-/etc/opt/rh/rh-php70/php.d/20-shmop.ini,
-/etc/opt/rh/rh-php70/php.d/20-simplexml.ini,
-/etc/opt/rh/rh-php70/php.d/20-snmp.ini,
-/etc/opt/rh/rh-php70/php.d/20-soap.ini,
-/etc/opt/rh/rh-php70/php.d/20-sockets.ini,
-/etc/opt/rh/rh-php70/php.d/20-sqlite3.ini,
-/etc/opt/rh/rh-php70/php.d/20-sysvmsg.ini,
-/etc/opt/rh/rh-php70/php.d/20-sysvsem.ini,
-/etc/opt/rh/rh-php70/php.d/20-sysvshm.ini,
-/etc/opt/rh/rh-php70/php.d/20-tidy.ini,
-/etc/opt/rh/rh-php70/php.d/20-tokenizer.ini,
-/etc/opt/rh/rh-php70/php.d/20-xml.ini,
-/etc/opt/rh/rh-php70/php.d/20-xmlwriter.ini,
-/etc/opt/rh/rh-php70/php.d/20-xsl.ini,
-/etc/opt/rh/rh-php70/php.d/20-zip.ini,
-/etc/opt/rh/rh-php70/php.d/30-mysqli.ini,
-/etc/opt/rh/rh-php70/php.d/30-pdo_mysql.ini,
-/etc/opt/rh/rh-php70/php.d/30-pdo_odbc.ini,
-/etc/opt/rh/rh-php70/php.d/30-pdo_pgsql.ini,
-/etc/opt/rh/rh-php70/php.d/30-pdo_sqlite.ini,
-/etc/opt/rh/rh-php70/php.d/30-wddx.ini,
-/etc/opt/rh/rh-php70/php.d/30-xmlreader.ini,
-/etc/opt/rh/rh-php70/php.d/30-xmlrpc.ini,
-/etc/opt/rh/rh-php70/php.d/40-apcu.ini,
-/etc/opt/rh/rh-php70/php.d/40-igbinary.ini,
-/etc/opt/rh/rh-php70/php.d/40-msgpack.ini,
-/etc/opt/rh/rh-php70/php.d/50-apc.ini,
-/etc/opt/rh/rh-php70/php.d/50-memcached.ini
+Configuration File (php.ini) Path: /etc/opt/rh/rh-php71
+Loaded Configuration File:         /etc/opt/rh/rh-php71/php.ini
+Scan for additional .ini files in: /etc/opt/rh/rh-php71/php.d
+Additional .ini files parsed:      /etc/opt/rh/rh-php71/php.d/20-bcmath.ini,
+/etc/opt/rh/rh-php71/php.d/20-bz2.ini,
+/etc/opt/rh/rh-php71/php.d/20-calendar.ini,
+/etc/opt/rh/rh-php71/php.d/20-ctype.ini,
+/etc/opt/rh/rh-php71/php.d/20-curl.ini,
+/etc/opt/rh/rh-php71/php.d/20-dba.ini,
+/etc/opt/rh/rh-php71/php.d/20-dom.ini,
+/etc/opt/rh/rh-php71/php.d/20-enchant.ini,
+/etc/opt/rh/rh-php71/php.d/20-exif.ini,
+/etc/opt/rh/rh-php71/php.d/20-fileinfo.ini,
+/etc/opt/rh/rh-php71/php.d/20-ftp.ini,
+/etc/opt/rh/rh-php71/php.d/20-gd.ini,
+/etc/opt/rh/rh-php71/php.d/20-gettext.ini,
+/etc/opt/rh/rh-php71/php.d/20-iconv.ini,
+/etc/opt/rh/rh-php71/php.d/20-imap.ini,
+/etc/opt/rh/rh-php71/php.d/20-intl.ini,
+/etc/opt/rh/rh-php71/php.d/20-json.ini,
+/etc/opt/rh/rh-php71/php.d/20-ldap.ini,
+/etc/opt/rh/rh-php71/php.d/20-mbstring.ini,
+/etc/opt/rh/rh-php71/php.d/20-mcrypt.ini,
+/etc/opt/rh/rh-php71/php.d/20-mysqlnd.ini,
+/etc/opt/rh/rh-php71/php.d/20-odbc.ini,
+/etc/opt/rh/rh-php71/php.d/20-pdo.ini,
+/etc/opt/rh/rh-php71/php.d/20-pgsql.ini,
+/etc/opt/rh/rh-php71/php.d/20-phar.ini,
+/etc/opt/rh/rh-php71/php.d/20-posix.ini,
+/etc/opt/rh/rh-php71/php.d/20-pspell.ini,
+/etc/opt/rh/rh-php71/php.d/20-recode.ini,
+/etc/opt/rh/rh-php71/php.d/20-shmop.ini,
+/etc/opt/rh/rh-php71/php.d/20-simplexml.ini,
+/etc/opt/rh/rh-php71/php.d/20-snmp.ini,
+/etc/opt/rh/rh-php71/php.d/20-soap.ini,
+/etc/opt/rh/rh-php71/php.d/20-sockets.ini,
+/etc/opt/rh/rh-php71/php.d/20-sqlite3.ini,
+/etc/opt/rh/rh-php71/php.d/20-sysvmsg.ini,
+/etc/opt/rh/rh-php71/php.d/20-sysvsem.ini,
+/etc/opt/rh/rh-php71/php.d/20-sysvshm.ini,
+/etc/opt/rh/rh-php71/php.d/20-tidy.ini,
+/etc/opt/rh/rh-php71/php.d/20-tokenizer.ini,
+/etc/opt/rh/rh-php71/php.d/20-xml.ini,
+/etc/opt/rh/rh-php71/php.d/20-xmlwriter.ini,
+/etc/opt/rh/rh-php71/php.d/20-xsl.ini,
+/etc/opt/rh/rh-php71/php.d/20-zip.ini,
+/etc/opt/rh/rh-php71/php.d/30-mysqli.ini,
+/etc/opt/rh/rh-php71/php.d/30-pdo_mysql.ini,
+/etc/opt/rh/rh-php71/php.d/30-pdo_odbc.ini,
+/etc/opt/rh/rh-php71/php.d/30-pdo_pgsql.ini,
+/etc/opt/rh/rh-php71/php.d/30-pdo_sqlite.ini,
+/etc/opt/rh/rh-php71/php.d/30-wddx.ini,
+/etc/opt/rh/rh-php71/php.d/30-xmlreader.ini,
+/etc/opt/rh/rh-php71/php.d/30-xmlrpc.ini,
+/etc/opt/rh/rh-php71/php.d/40-apcu.ini,
+/etc/opt/rh/rh-php71/php.d/40-igbinary.ini,
+/etc/opt/rh/rh-php71/php.d/40-msgpack.ini,
+/etc/opt/rh/rh-php71/php.d/50-apc.ini,
+/etc/opt/rh/rh-php71/php.d/50-memcached.ini
 ```
 
 # Optional Steps
 
 *The following steps are **OPTIONAL**, but recommended.*
 
-These are some things that will make using the RedHat PHP 7.0.x SCL packages and upgrading existing code bases a little easier.  
+These are some things that will make using the RedHat PHP 7.1.x SCL packages and upgrading existing code bases a little easier.  
 
 
 * On development machines that may be building C/C++ packages that require installed php headers, additionally install the corresponding devel packages.
 
     ```
-    yum install rh-php70-php-devel rh-php70-scldevel sclo-php70-php-pecl-apcu-devel sclo-php70-php-pecl-http-devel
+    yum install rh-php71-php-devel rh-php71-php-pecl-apcu-devel rh-php71-scldevel sclo-php71-php-pecl-http-devel sclo-php71-php-pecl-igbinary-devel sclo-php71-php-pecl-imagick-devel sclo-php71-php-pecl-msgpack-devel sclo-php71-php-pecl-propro-devel sclo-php71-php-pecl-raphf-devel
     ```
 
 * Remove the default CentOS7 *httpd\** & *php\** packages & their dependencies.  This can help avoid confusion as to which version of php (& httpd) is actually in use.
@@ -204,7 +204,7 @@ These are some things that will make using the RedHat PHP 7.0.x SCL packages and
     yum remove httpd httpd-tools php*
     ```
 
-* Create (or modify) the systemctl EnvironmentFile for httpd.service.  By doing this, it will cause the scl httpd24 to re-use the existing `/etc/httpd` structure (rather than what's in `/opt/rh/httpd24/root/etc/httpd`).  If **`#OPTIONS= in /opt/rh/httpd24/root/etc/sysconfig/httpd`** and change it to the following, then be sure to update the contents of `/etc/httpd` to reflect what's in `/opt/rh/httpd24/root/etc/httpd`.
+* Create (or modify) the systemctl EnvironmentFile for httpd.service.  By doing this, it will cause the scl httpd24 to re-use the existing `/etc/httpd` structure (rather than what's in `/opt/rh/httpd24/root/etc/httpd`).  Modify **`#OPTIONS= in /opt/rh/httpd24/root/etc/sysconfig/httpd`** and change it to the following, then be sure to update the contents of `/etc/httpd` to reflect what's in `/opt/rh/httpd24/root/etc/httpd`.
 
     ```
     OPTIONS="-d /etc/httpd"
@@ -223,10 +223,10 @@ Many packages, programs, & utilities (and people) expect the default CentOS 7 fi
     rsync -avp /opt/rh/httpd24/root/etc/httpd/ /etc/httpd/ --delete-after
     ```
 
-* On CentOS 7 machines with *only* rh-php-7.0 installed, it may be easiest to use a symbolic link.  However, it should **not** be done on machines that choose to have the default php and scl php co-exist on the same machine.
+* On CentOS 7 machines with *only* rh-php-7.1 installed, it may be easiest to use a symbolic link.  However, it should **not** be done on machines that choose to have the default php and scl php co-exist on the same machine.
 
     ```
-    ln -s /opt/rh/rh-php70/root/usr/bin/php /usr/bin/php
+    ln -s /opt/rh/rh-php71/root/usr/bin/php /usr/bin/php
     ```
 
 * Best practice, for scripts in general, is to use tge `/usr/bin/env <processor>` directives rather than hard coding something like `#!/usr/bin/php`.  

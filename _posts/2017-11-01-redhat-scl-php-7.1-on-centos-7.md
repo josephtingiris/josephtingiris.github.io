@@ -325,7 +325,7 @@ Many packages, programs, & utilities (and people) expect the default CentOS 7 fi
     find . -type f | xargs grep -l "/bin/php"
     ```
 
-# DISCLAIMER
+# Disclaimer
 
 **Many SCL packages are available and may have been installed if you're blindly copy/pasting the commands in this guide. Some are 'rh' (maintained by RedHat), while others are 'sclo' (maintained by the Software Collections organization [not RedHat]).  Some are required & others may not be needed.**
 
@@ -335,7 +335,7 @@ Many packages, programs, & utilities (and people) expect the default CentOS 7 fi
 
 
 
-# REFERENCES
+# References
 
 * [https://access.redhat.com/solutions/2662201](https://access.redhat.com/solutions/2662201)
 * [http://wiki.centos.org/SpecialInterestGroup/SCLo](http://wiki.centos.org/SpecialInterestGroup/SCLo)

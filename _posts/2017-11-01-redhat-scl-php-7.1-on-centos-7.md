@@ -34,8 +34,6 @@ tags:
 published: true
 ---
 
-# Introduction
-
 This is a functional reference guide for Enterprise Linux, specifically CentOS 7, that attempts to provide a straightforward procedure for producing a highly functional, stable, and modern LAMP 7 stack (i.e. HOWTO).
 
 ## Install the CentOS EPEL & RedHat Software Collections Library (scl) release packages, clean, & rebuild the yum cache.

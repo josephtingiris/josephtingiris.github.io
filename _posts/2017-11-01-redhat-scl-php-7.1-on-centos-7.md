@@ -337,7 +337,7 @@ Many packages, programs, & utilities (and people) expect the default CentOS 7 fi
 
 # REFERENCES
 
-* https://access.redhat.com/solutions/2662201
-* http://wiki.centos.org/SpecialInterestGroup/SCLo
-* https://www.softwarecollections.org/en/
-* https://access.redhat.com/security/updates/backporting
+* [https://access.redhat.com/solutions/2662201](https://access.redhat.com/solutions/2662201)
+* [http://wiki.centos.org/SpecialInterestGroup/SCLo](http://wiki.centos.org/SpecialInterestGroup/SCLo)
+* [https://www.softwarecollections.org/en/](https://www.softwarecollections.org/en/)
+* [https://access.redhat.com/security/updates/backporting](https://access.redhat.com/security/updates/backporting)

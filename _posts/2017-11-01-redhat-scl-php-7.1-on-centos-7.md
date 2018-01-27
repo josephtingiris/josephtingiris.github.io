@@ -171,7 +171,7 @@ Type=notify
 EnvironmentFile=/etc/sysconfig/httpd
 ExecStart=/opt/rh/httpd24/root/usr/sbin/httpd-scl-wrapper \$OPTIONS -DFOREGROUND
 ExecReload=/opt/rh/httpd24/root/usr/sbin/httpd-scl-wrapper \$OPTIONS -k graceful
-ExecStop=/bin/kill -WINCH ${MAINPID}
+ExecStop=/bin/kill -WINCH \${MAINPID}
 # We want systemd to give httpd some time to finish gracefully, but still want
 # it to kill httpd after TimeoutStopSec if something went wrong during the
 # graceful stop. Normally, Systemd sends SIGTERM signal right after the

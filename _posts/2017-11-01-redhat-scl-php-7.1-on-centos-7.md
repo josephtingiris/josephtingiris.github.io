@@ -36,21 +36,21 @@ published: true
 
 This is a functional reference guide for Enterprise Linux, specifically CentOS 7, that attempts to provide a straightforward procedure for producing a highly functional, stable, and modern LAMP 7 stack (i.e. HOWTO).
 
-## Install the CentOS EPEL & RedHat Software Collections Library (scl) release packages, clean, & rebuild the yum cache.
+# Install the CentOS EPEL & RedHat Software Collections Library (scl) release packages, clean, & rebuild the yum cache.
 ```
 sudo yum clean all
 sudo yum makecache
 sudo yum install epel-release centos-release-scl
 ```
 
-## Install the latest RedHat SCL php 7.1 & corresponding, dependent httpd24 packages.
+# Install the latest RedHat SCL php 7.1 & corresponding, dependent httpd24 packages.
 
 The following command installs the most commonly required php modules, as well.
 ```
 sudo yum install rh-php71 rh-php71-php rh-php71-php-bcmath rh-php71-php-cli rh-php71-php-common rh-php71-php-dba rh-php71-php-embedded rh-php71-php-enchant rh-php71-php-fpm rh-php71-php-gd rh-php71-php-intl rh-php71-php-ldap rh-php71-php-mbstring rh-php71-php-mysqlnd rh-php71-php-odbc rh-php71-php-pdo rh-php71-php-pear rh-php71-php-pecl-apcu rh-php71-php-pgsql rh-php71-php-process rh-php71-php-pspell rh-php71-php-recode rh-php71-php-snmp rh-php71-php-soap rh-php71-php-xml rh-php71-php-xmlrpc sclo-php71-php-imap sclo-php71-php-mcrypt sclo-php71-php-pecl-amqp sclo-php71-php-pecl-apcu-bc sclo-php71-php-pecl-apfd sclo-php71-php-pecl-geoip sclo-php71-php-pecl-http sclo-php71-php-pecl-igbinary sclo-php71-php-pecl-imagick sclo-php71-php-pecl-lzf sclo-php71-php-pecl-memcached sclo-php71-php-pecl-mongodb sclo-php71-php-pecl-msgpack sclo-php71-php-pecl-propro sclo-php71-php-pecl-raphf sclo-php71-php-pecl-redis sclo-php71-php-pecl-selinux sclo-php71-php-pecl-solr2 sclo-php71-php-pecl-uploadprogress sclo-php71-php-pecl-uuid sclo-php71-php-pecl-xattr sclo-php71-php-pecl-xdebug sclo-php71-php-tidy httpd24 httpd24-mod_ssl
 ```
 
-## Verify the php 7.1 installation.
+# Verify the php 7.1 installation.
 
 *At this point, there should be a fully functional httpd 2.4 with php 7.1 (using the mysqlnd driver, etc).*
 ```sh
@@ -134,11 +134,11 @@ Additional .ini files parsed:      /etc/opt/rh/rh-php71/php.d/15-xdebug.ini,
 /etc/opt/rh/rh-php71/php.d/50-solr.ini
 ```
 
-## Additional Steps
+# Additional Steps
 
 There are some things that I've found make using the RedHat PHP 7.1.x SCL packages and upgrading existing code bases a little easier.  *The following steps are **OPTIONAL**, but recommended.*
 
-### To avoid potential conflict, ensure the CentOS base httpd is stopped, disabled, and completely removed from the system.
+## To avoid potential conflict, ensure the CentOS base httpd is stopped, disabled, and completely removed from the system.
 
 **_I'd strongly recommend removing the CentOS base php & httpd._**  Having the base packages on the system, with SCL packages, can cause confusion.  Although, to be fair, it's possible as long as both httpd installs are configured to use different interfaces and/or ports.
 ```sh

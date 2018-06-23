@@ -64,5 +64,5 @@ So, the writing is on the minimal Linux wall.  The traditional editor 'holy war'
 
 Frankly, I'll probably be programming as long as I can type because I love it.  I've still got at least another 15+ years until I can retire.  I also hope the next generation(s) of programmers will build on and improve what's been built before us.
 
-About every year, or so, I take a look at the current state of the IDE and what's available.  Over the past couple years,
+About every year, or so, I take a look at the current state of the IDE and what's available.  Neovim is pretty cool.  It's definitely a step up from vim-enhanced.
 

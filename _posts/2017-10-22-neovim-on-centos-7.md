@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "2017-10-22-neovim-on-centos-7.md"
+title: "Neo(vim)"
 author: "Joseph Tingiris"
 date: 2017-10-22 09:02:33 -0400
 last_modified_at: 2017-10-22 09:02:33 -0400

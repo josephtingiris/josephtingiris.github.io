@@ -36,6 +36,8 @@ published: true
 
 This is a functional reference guide for Enterprise Linux, specifically CentOS 7, that attempts to provide a straightforward procedure for producing a highly functional, stable, and modern LAMP 7 stack (i.e. HOWTO).
 
+# TL;DR
+
 # Install the CentOS EPEL & RedHat Software Collections Library (scl) release packages, clean, & rebuild the yum cache.
 ```
 sudo yum clean all
@@ -300,6 +302,7 @@ Many packages, programs, & utilities (and people) expect the default CentOS 7 fi
 
     ```
     ln -s /opt/rh/rh-php72/root/usr/bin/php /usr/bin/php
+    ln -s /etc/opt/rh/rh-php72/php.ini /etc/php.ini
     ```
 
 * Best practice, for shell scripts in general, is to use the `/usr/bin/env <processor>` directives rather than hard coding something like `#!/usr/bin/php`.  This is a good practice.

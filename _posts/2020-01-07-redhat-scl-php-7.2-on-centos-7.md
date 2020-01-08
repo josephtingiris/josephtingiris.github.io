@@ -38,6 +38,104 @@ This is a functional reference guide for Enterprise Linux, specifically CentOS 7
 
 # TL;DR
 
+```
+sudo yum clean all
+sudo yum makecache
+sudo yum -y install epel-release centos-release-scl
+
+sudo yum -y install httpd24-mod_ssl libsodium
+sudo yum -y install rh-php72 rh-php72-php rh-php72-php-bcmath rh-php72-php-cli rh-php72-php-common rh-php72-php-curl rh-php72-php-dba
+sudo yum -y install rh-php72-php-embedded rh-php72-php-enchant rh-php72-php-fpm rh-php72-php-gd rh-php72-php-intl rh-php72-php-ldap
+sudo yum -y install rh-php72-php-mbstring rh-php72-php-memcached rh-php72-php-mysqlnd rh-php72-php-odbc rh-php72-php-pdo
+sudo yum -y install rh-php72-php-pear rh-php72-php-pecl-apcu rh-php72-php-pgsql rh-php72-php-process rh-php72-php-pspell
+sudo yum -y install rh-php72-php-recode rh-php72-php-snmp rh-php72-php-soap rh-php72-php-xml rh-php72-php-xmlrpc rh-php72-php-zip
+sudo yum -y install sclo-php72-php-imap sclo-php72-php-pecl-amqp sclo-php72-php-pecl-apcu-bc sclo-php72-php-sodium
+sudo yum -y install sclo-php72-php-pecl-apfd sclo-php72-php-pecl-geoip sclo-php72-php-pecl-http sclo-php72-php-pecl-igbinary
+sudo yum -y install sclo-php72-php-pecl-imagick sclo-php72-php-pecl-lzf sclo-php72-php-pecl-memcached sclo-php72-php-pecl-mongodb
+sudo yum -y install sclo-php72-php-pecl-msgpack sclo-php72-php-pecl-propro sclo-php72-php-pecl-raphf sclo-php72-php-pecl-redis
+sudo yum -y install sclo-php72-php-pecl-selinux sclo-php72-php-pecl-solr2 sclo-php72-php-pecl-uploadprogress sclo-php72-php-pecl-uuid
+sudo yum -y install sclo-php72-php-pecl-xattr sclo-php72-php-pecl-xdebug sclo-php72-php-tidy
+
+/opt/rh/rh-php72/root/usr/bin/php --ini
+
+sudo systemctl stop httpd
+sudo systemctl disable httpd
+
+yum -y remove httpd httpd-tools php*
+
+cat <<EOF > /etc/systemd/system/httpd.service
+[Unit]
+Description=The RedHat Software Collections Library (SCL) Apache HTTP Server
+After=network.target remote-fs.target nss-lookup.target
+Documentation=man:httpd(8)
+Documentation=man:apachectl(8)
+
+[Service]
+Type=notify
+EnvironmentFile=/etc/sysconfig/httpd
+ExecStart=/opt/rh/httpd24/root/usr/sbin/httpd-scl-wrapper \$OPTIONS -DFOREGROUND
+ExecReload=/opt/rh/httpd24/root/usr/sbin/httpd-scl-wrapper \$OPTIONS -k graceful
+ExecStop=/bin/kill -WINCH \${MAINPID}
+# We want systemd to give httpd some time to finish gracefully, but still want
+# it to kill httpd after TimeoutStopSec if something went wrong during the
+# graceful stop. Normally, Systemd sends SIGTERM signal right after the
+# ExecStop, which would kill httpd. We are sending useless SIGCONT here to give
+# httpd time to finish.
+KillSignal=SIGCONT
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+cat <<EOF > /etc/sysconfig/httpd
+OPTIONS="-d /etc/httpd"
+LANG=C
+EOF
+chmod 644 /etc/sysconfig/httpd
+
+cat <<EOF > /etc/logrotate.d/httpd
+/var/log/httpd/*log {
+    missingok
+    notifempty
+    sharedscripts
+    compress
+    postrotate
+        /bin/systemctl reload httpd.service > /dev/null 2>/dev/null || true
+    endscript
+    su apache apache
+}
+EOF
+chmod 644 /etc/logrotate.d/httpd
+
+cat <<EOF > /etc/ld.so.conf.d/rh-php72.conf
+/opt/rh/rh-php72/root/usr/lib64
+/opt/rh/httpd24/root/usr/lib64
+/opt/rh/rh-php72/root/usr/lib
+/opt/rh/httpd24/root/usr/lib
+EOF
+ldconfig
+
+if [ -d /etc/httpd ] && [ ! -d /etc/httpd.base ]; then (mv /etc/httpd /etc/httpd.base); fi
+if [ ! -f /etc/httpd/conf/httpd.conf ]; then (rsync -avp /opt/rh/httpd24/root/etc/httpd/ /etc/httpd/); fi
+
+for httpd24_conf in $(find /etc/httpd -type f | xargs grep -l "/opt/rh/httpd24/root"); do echo $httpd24_conf; sed -i -e 's#/opt/rh/httpd24/root/etc#/etc#g' -e 's#/opt/rh/httpd24/root/var/www#/var/www#g' $httpd24_conf; done
+
+sudo systemctl daemon-reload
+sudo systemctl enable httpd24-htcacheclean
+sudo systemctl start httpd24-htcacheclean
+sudo systemctl status httpd24-htcacheclean
+sudo systemctl enable httpd
+sudo systemctl start httpd
+sudo systemctl status httpd
+
+ln -s /opt/rh/rh-php72/root/usr/bin/php /usr/bin/php
+ln -s /etc/opt/rh/rh-php72/php.ini /etc/php.ini
+
+sudo systemctl daemon-reload
+sudo systemctl status httpd
+```
+
 # Install the CentOS EPEL & RedHat Software Collections Library (scl) release packages, clean, & rebuild the yum cache.
 ```
 sudo yum clean all
@@ -243,7 +341,7 @@ for httpd24_conf in $(find /etc/httpd -type f | xargs grep -l "/opt/rh/httpd24/r
 sudo systemctl daemon-reload # can't hurt!
 sudo systemctl enable httpd24-htcacheclean
 sudo systemctl start httpd24-htcacheclean
-sudo systemctl status httpd-htcacheclean
+sudo systemctl status httpd24-htcacheclean
 sudo systemctl enable httpd # or, httpd24-http
 sudo systemctl start httpd # or, httpd24-http
 sudo systemctl status httpd # or, httpd24-http

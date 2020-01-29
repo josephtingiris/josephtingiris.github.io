@@ -3,7 +3,7 @@ layout: post
 title: "How to install the RedHat Software Collections Library PHP 7.2 on CentOS 7"
 author: "Joseph Tingiris"
 date: 2020-01-07 19:48:00 -0400
-last_modified_at: 2020-01-07 19:48:00 -0400
+last_modified_at: 2020-29-07 16:01:00 -0400
 categories:
 - howto
 - install
@@ -52,7 +52,7 @@ sudo yum -y install rh-php72-php-recode rh-php72-php-snmp rh-php72-php-soap rh-p
 sudo yum -y install sclo-php72-php-imap sclo-php72-php-pecl-amqp sclo-php72-php-pecl-apcu-bc sclo-php72-php-sodium
 sudo yum -y install sclo-php72-php-pecl-apfd sclo-php72-php-pecl-geoip sclo-php72-php-pecl-http sclo-php72-php-pecl-igbinary
 sudo yum -y install sclo-php72-php-pecl-imagick sclo-php72-php-pecl-lzf sclo-php72-php-pecl-memcached sclo-php72-php-pecl-mongodb
-sudo yum -y install sclo-php72-php-pecl-msgpack sclo-php72-php-pecl-propro sclo-php72-php-pecl-raphf sclo-php72-php-pecl-redis
+sudo yum -y install sclo-php72-php-pecl-msgpack sclo-php72-php-pecl-propro sclo-php72-php-pecl-raphf sclo-php72-php-pecl-redis5
 sudo yum -y install sclo-php72-php-pecl-selinux sclo-php72-php-pecl-solr2 sclo-php72-php-pecl-uploadprogress sclo-php72-php-pecl-uuid
 sudo yum -y install sclo-php72-php-pecl-xattr sclo-php72-php-pecl-xdebug sclo-php72-php-tidy
 
@@ -116,6 +116,7 @@ cat <<EOF > /etc/ld.so.conf.d/rh-php72.conf
 EOF
 ldconfig
 
+if [ ! -d /var/log/httpd ]; then (mkdir -p /var/log/httpd && chown apache:apache /var/log/httpd); fi
 if [ -d /etc/httpd ] && [ ! -d /etc/httpd.base ]; then (mv /etc/httpd /etc/httpd.base); fi
 if [ ! -f /etc/httpd/conf/httpd.conf ]; then (rsync -avp /opt/rh/httpd24/root/etc/httpd/ /etc/httpd/); fi
 
